@@ -1190,6 +1190,16 @@ async def start_polling():
             await asyncio.sleep(backoff)
             backoff = min(backoff * 2, 60)
 
+async def self_ping():
+    while True:
+        await asyncio.sleep(300)
+        try:
+            async with aiohttp.ClientSession() as s:
+                async with s.get("https://telegram-bot-uv84.onrender.com") as r:
+                    print(f"Self-ping: {r.status}")
+        except Exception:
+            pass
+
 async def main():
     global session, _connector
     await load_auth_list()
@@ -1203,6 +1213,7 @@ async def main():
     try:
         asyncio.create_task(web_server())
         asyncio.create_task(periodic_result_saver())
+        asyncio.create_task(self_ping())
         await start_polling()
     finally:
         await session.close()
