@@ -19,8 +19,7 @@ ADMINS = [
     "8354349006"
 ]
 
-
-ADMIN_USERNAME = "@DogGod7475"
+ADMIN_USERNAME = "@ArrowDemon2006"
 
 def is_admin(user_id):
     return str(user_id) in ADMINS
@@ -1222,7 +1221,9 @@ def iter_codes(mode, start_digit=None):
     raise ValueError(f"Unsupported scan mode: {mode}")
 
 def format_progress(checked, total=None, speed=0, found=0):
-    speed_str = f"{speed:,.0f} codes/min"
+    # `speed` is measured in codes per minute; show both units for clarity.
+    speed_per_second = speed / 60 if speed else 0
+    speed_str = f"{speed_per_second:,.1f} codes/s ({speed:,.0f}/min)"
     if total is not None:
         bar_length = 20
         percent = (checked / total) * 100
@@ -1233,14 +1234,14 @@ def format_progress(checked, total=None, speed=0, found=0):
             f"📦Checked : {checked:,}/{total:,}\n"
             f"📊Progress : {percent:.2f}%\n"
             f"⚡Speed : {speed_str}\n"
-            f"✅Success code hit : {found}\n"
+            f"✅Found codes : {found}\n"
             f"[{bar}]"
         )
     return (
         f"🔍Scanning VOUCHER Codes...\n\n"
         f"📦Checked : {checked:,}\n"
         f"⚡Speed : {speed_str}\n"
-        f"✅Success code hit : {found}\n"
+        f"✅Found codes : {found}\n"
         f"📊Status : running\n"
     )
 
