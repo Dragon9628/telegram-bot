@@ -20,7 +20,7 @@ ADMINS = [
 ]
 
 
-ADMIN_USERNAME = @DogGod7475
+ADMIN_USERNAME = "@DogGod7475"
 
 def is_admin(user_id):
     return str(user_id) in ADMINS
