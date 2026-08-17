@@ -740,6 +740,16 @@ async def genkey(message):
             sha,
             f"Add key for {user_id}"
         )
+        # Keep the current process in sync with the persisted auth list.
+        # Protected handlers such as /input check these in-memory maps.
+        try:
+            target_id = int(user_id)
+            approve[target_id] = True
+            paid_users[user_id] = True
+            if target_id not in user_data:
+                user_data[target_id] = {}
+        except (TypeError, ValueError):
+            pass
         await bot.reply_to(
             message,
             f"✅ Key Generated\n\n"
