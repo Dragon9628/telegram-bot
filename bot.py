@@ -944,6 +944,24 @@ async def handle_portal(message):
         )
 
 async def check_session_url_improved(session_url, use_proxy=False):
+    # Captive-portal URLs are tied to the user's local gateway, so Render may
+    # not be able to fetch them. Validate the expected URL structure first;
+    # retain the remote check below for other supported portal formats.
+    from urllib.parse import urlparse, parse_qs
+    try:
+        parsed = urlparse(str(session_url).strip())
+        host = (parsed.hostname or "").lower()
+        query = parse_qs(parsed.query)
+        if (
+            parsed.scheme == "https"
+            and host == "portal-as.ruijienetworks.com"
+            and parsed.path == "/api/auth/wifidog"
+            and query.get("stage", [""])[0].lower() == "portal"
+        ):
+            return True
+    except Exception as e:
+        print(f"Portal URL structure check error: {e}")
+
     headers = {
         'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7',
         'accept-language': 'en-US,en;q=0.9',
