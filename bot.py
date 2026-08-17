@@ -16,11 +16,11 @@ REPO_OWNER = "minthant2006mm-sudo"
 REPO_NAME = "codehack"
 
 ADMINS = [
-    "8271519771",
-    ""
+    "8354349006"
 ]
 
-ADMIN_USERNAME = "@ArrowDemon2006"
+
+ADMIN_USERNAME = @DogGod7475
 
 def is_admin(user_id):
     return str(user_id) in ADMINS
