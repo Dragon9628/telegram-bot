@@ -8,7 +8,7 @@ from datetime import datetime, timedelta, timezone
 from urllib.parse import urlparse, parse_qs
 
 # ------------------------- CONFIG -------------------------
-BOT_TOKEN = '8984072831:AAF_a-oGSRSR7xlVEDBM4qULT2cprOxR_fk'
+BOT_TOKEN = '8984072831:AAF9cE_yeBwK7Yfy9PkUT29lPjtSckGEF7A'
 ADMIN_ID = '8354349006'          # အဓိက Admin
 AUTH_FILE = "1.json"      # Key စာရင်း
 RESULT_FILE = "2.json"  # Success Code စာရင်း
